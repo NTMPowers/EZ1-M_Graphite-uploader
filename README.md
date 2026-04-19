@@ -39,29 +39,29 @@ Recommended for continuous operation.
 
 Place it somewhere persistent:
 
-    /opt/ez1m-grafana/ez1-m_graphite.py
+    /opt/ez1-m_graphite/ez1-m_graphite.py
 
 Make it executable:
 
-    chmod +x /opt/ez1m-grafana/ez1-m_graphite.py
+    chmod +x /opt/ez1-m_graphite/ez1-m_graphite.py
 
 ## 2. Create a systemd service file
 
 Create:
 
-    /etc/systemd/system/ez1m-grafana.service
+    /etc/systemd/system/ez1-m_graphite.service
 
 Contents:
 
     [Unit]
-    Description=EZ1-M Inverter to Grafana Cloud Uploader
+    Description=EZ1-M Graphite uploader
     After=network-online.target
     Wants=network-online.target
 
     [Service]
     Type=simple
-    ExecStart=/usr/bin/python3 /opt/ez1m-grafana/ez1-m_graphite.py
-    WorkingDirectory=/opt/ez1m-grafana
+    ExecStart=/usr/bin/python3 /opt/ez1-m_graphite/ez1-m_graphite.py
+    WorkingDirectory=/opt/ez1-m_graphite
     Restart=always
     RestartSec=10
     User=root
@@ -73,8 +73,8 @@ Contents:
 ## 3. Reload systemd and enable service
 
     sudo systemctl daemon-reload
-    sudo systemctl enable --now ez1m-grafana.service
+    sudo systemctl enable --now ez1-m_graphite.service
 
 ## 4. Check logs
 
-    journalctl -u ez1m-grafana.service -f
+    journalctl -u ez1-m_graphite.service -f
